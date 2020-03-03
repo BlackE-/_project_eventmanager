@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+<head>
+	<title>GRID HW</title>
+	<link type="text/css" href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto&display=swap" rel="stylesheet">
+	<!-- Required Core Stylesheet -->
+	<link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+	<!-- Optional Theme Stylesheet -->
+	<!-- <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css"> -->
+	<style type="text/css">
+		.pink{color:#f9246a;}
+		.blue{color:#67d8ec;}
+		.purple{color:#aa80ff;}
+		.blue_back{background: #089FC7;}
+
+		body{background:#000;color:#fff;}
+		h1,h2,h3,h4,h5,h6{font-family: 'Playfair Display', Times-NewRomance;}
+		p,span{font-family: 'Roboto',san-serif;}
+		.container{width:90%;max-width: 960px;margin:0 auto;}
+		.center{text-align: center;}
+
+		.glide__slides li{background-color:#fff;color:#000;height:60vh;overflow: hidden;font-size:7px;text-align: center;}
+	</style>
+</head>
+<body>
+	<div class="container center">
+		<h1 class="blue">Grid Exercise</h1>
+		<p class="pink">Level 101</p>
+	</div>
+	<div class="container">
+		<div class="glide">
+		  <div class="glide__track" data-glide-el="track">
+		    <ul class="glide__slides">
+		    	<li class="glide_slide">0</li>
+		    </ul>
+		  </div>
+		  <div class="glide"  data-glide-el="controls">
+			  <div class="glide__track" data-glide-el="track">...</div>
+
+			  <div class="glide__arrows" data-glide-el="controls">
+			    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+			    <button class="glid
+			    e__arrow glide__arrow--right" data-glide-dir=">">next</button>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+	<!-- import Glide, { Controls } from '@glidejs/glide/dist/glide.modular.esm' -->
+
+	<script>
+		const arrayDates = [];
+		const hoy_ = new Date(Date.now());
+		// console.log(hoy_);
+		const hoy_timestamp = hoy_.getTime();
+		const leapYear = (year) =>{
+			return year % 4 == 0 ? true:false;
+		};
+
+		const get3MonthsAfterToday = (date_,date_timestamp) =>{
+			const day_ = date_.getDate();
+			const month_ = date_.getMonth();
+			const year_ = date_.getFullYear();
+			let remaing_days = 0;
+			let days_ = 0;
+			switch(month_){
+				case 0:
+					//january
+					remaing_days = 31 - day_;
+
+					//regresar febrero,marzo,abril
+					days_ = leapYear(year_) ? 28 : 29;
+					days_ += 31; //marzo
+					days_ += 30; //abril
+				break;
+				case 1:
+					//february
+					remaing_days = leapYear(year_) ? 29 - day_ : 28 - day_;
+					//regresar marzo,abril,mayo
+					days_ += 31; //marzo
+					days_ += 30; //abril
+					days_ += 31; //mayo
+				break;
+				case 2:
+					//march
+					remaing_days = 31 - day_;
+
+					//regresar abril,mayo,junio
+					days_ += 30; //abril
+					days_ += 31; //mayo
+					days_ += 30; //junio
+				break;
+				case 3:
+					//april
+					remaing_days = 30 - day_;
+
+					//regresar mayo,junio,julio
+					days_ += 31; //mayo
+					days_ += 30; //junio
+					days_ += 31; //julio
+				break;
+				case 4:
+					//may
+					remaing_days = 31 - day_;
+
+					//regresar junio,julio,agosto
+					days_ += 30; //junio
+					days_ += 31; //julio
+					days_ += 31; //agosto
+				break;
+				case 5:
+					//june
+					remaing_days = 30 - day_;
+
+					//regresar julio,agosto,septiembre
+					days_ += 31; //julio
+					days_ += 31; //agosto
+					days_ += 30; //septiembre
+				break;
+				case 6:
+					//july
+					remaing_days = 31 - day_;
+
+					//regresar agosto,septiembre,octubre
+					days_ += 31; //agosto
+					days_ += 30; //septiembre
+					days_ += 31; //octubre
+				break;
+				case 7:
+					//august
+					remaing_days = 31 - day_;
+
+					//regresar septiembre,octubre,noviembre
+					days_ += 31; //septiembre
+					days_ += 30; //octubre
+					days_ += 31; //noviembre
+				break;
+				case 8:
+					//september
+					remaing_days = 30 - day_;
+
+					//regresar octubre,noviembre,diciembre
+					days_ += 31; //octubre
+					days_ += 30; //noviembre
+					days_ += 31; //diciembre
+				break;
+				case 9:
+					//october
+					remaing_days = 31 - day_;
+
+					//regresar noviembre,diciembre,enero
+					days_ += 30; //noviembre
+					days_ += 31; //diciembre
+					days_ += 31; //enero
+				break;
+				case 10:
+					//november
+					remaing_days = 30 - day_;
+
+					//regresar diciembre,enero,febrero
+					days_ += 31; //diciembre
+					days_ += 31; //enero
+					days_ += leapYear(year_ + 1 ) ? 28 : 29;
+				break;
+				case 11:
+					//march
+					remaing_days = 31 - day_;
+
+					//regresar enero,febrero,marzo
+					days_ += 31; //agosto
+					days_ += leapYear(year_ + 1 ) ? 28 : 29;
+					days_ += 31;
+				break;
+			}
+
+			const newDate_timestamps = date_timestamp + (1000 * 60 * 60 * 24 * days_);
+
+			const newDate_ = new Date( newDate_timestamps );
+			return newDate_;
+		};
+
+		const get3MonthsBeforeToday = (date_,date_timestamp) =>{
+			const day_ = date_.getDate();
+			const month_ = date_.getMonth();
+			const year_ = date_.getFullYear();
+			let days_ = 0;
+
+			switch(month_){
+				case 0:
+					//january
+
+					//regresar diciembre, noviembre, octubre
+					days_ += 31; //octubre
+					days_ += 30; //noviembre
+					days_ += 31; //diciembre
+
+					
+				break;
+				case 1:
+					//february
+
+					//regresar enero,diciembre,noviembre
+					days_ += 31; //enero
+					days_ += 31; //diciembre
+					days_ += 30; //noviembre
+				break;
+				case 2:
+					//march
+
+					//regresar febrero,enero,diciembre
+					days_ = leapYear(year_) ? 28 : 29; //febrero
+					days_ += 31; //enero
+					days_ += 31; //diciembre
+
+					
+				break;
+				case 3:
+					//april
+
+					//regresar marzo,febrero,enero
+					days_ += 31; //marzo
+					days_ = leapYear(year_) ? 28 : 29; //febrero
+					days_ += 31; //enero
+				break;
+				case 4:
+					//may
+
+					//regresar abril,marzo,febrero
+					
+					days_ += 30; //abril
+					days_ += 31; //marzo
+					days_ = leapYear(year_) ? 28 : 29; //febrero
+				break;
+				case 5:
+					//june
+
+					//regresar mayo,abril,marzo
+					days_ += 31; //mayo
+					days_ += 30; //abril
+					days_ += 31; //marzo
+				break;
+				case 6:
+					//july
+
+					//regresar junio,mayo,abril
+					days_ += 30; //junio
+					days_ += 31; //mayo
+					days_ += 30; //abril
+				break;
+				case 7:
+					//august
+
+					//regresar julio,junio,mayo
+					days_ += 31; //julio
+					days_ += 30; //junio
+					days_ += 31; //mayo
+				break;
+				case 8:
+					//september
+
+					//regresar agosto,julio,junio
+					days_ += 31; //agosto
+					days_ += 31; //julio
+					days_ += 30; //junio
+				break;
+				case 9:
+					//october
+
+					//regresar septiembre,agosto,julio
+					days_ += 30; //septiembre
+					days_ += 31; //agosto
+					days_ += 31; //julio
+				break;
+				case 10:
+					//november
+
+					//regresar octubre,septiembre,agosto
+					days_ += 31; //octubre
+					days_ += 31; //septiembre
+					days_ += 31; //agosto
+				break;
+				case 11:
+					//december
+
+					//regresar noviembre,octubre,septiembre
+					days_ += 30; //noviembre
+					days_ += 31; //octubre
+					days_ += 30; //septiembre
+				break;
+			}
+
+			const newDate_timestamps = date_timestamp + (1000 * 60 * 60 * 24 * -days_);
+
+			const newDate_ = new Date( newDate_timestamps );
+			return newDate_;
+		};
+
+		const startDate = get3MonthsBeforeToday(hoy_,hoy_timestamp);
+		// console.log(startDate);
+		const endDate = get3MonthsAfterToday(hoy_,hoy_timestamp);
+		// console.log(endDate);
+
+		// date array
+		const getDateArray = (start, end) =>{
+			//https://www.dyclassroom.com/javascript-code/create-an-array-of-dates-between-start-date-and-end-date-in-javascript
+			const arr = [];
+			let dt = start;
+			while (dt <= end) {	
+    			arr.push(dt);
+    			dt.setDate(dt.getDate() + 1);
+  			}
+  			return arr;
+  		}
+
+  		const dateArr = getDateArray(startDate, endDate);
+  		let index = 0;
+  		for( let key of dateArr){
+  			let node = document.createElement("LI");                 // Create a <li> node
+			let day = startDate.getDate() + index;
+			index++;
+
+
+			let textnode = document.createTextNode(day);         // Create a text node
+			node.appendChild(textnode);                              // Append the text to <li>
+			document.querySelector(".glide__slides").appendChild(node);
+  		}
+
+  		const starAtDate = dateArr.length / 2;
+
+  		new Glide('.glide',{
+  			type: 'carousel',
+  			startAt: starAtDate,
+  			perView: 3
+  		}).mount({})
+	</script>
+
+</body>
+</html>
