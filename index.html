@@ -22,15 +22,33 @@
 
 		.glide__slides li{position:relative;background-color:#fff;height:60vh;overflow: hidden;font-size:7px;text-align: center;}
 		.glide__slides li p{color:#000;font-size:7px;z-index: 10;position: relative;}
+		.glide__slides .today{border:2px solid #67d8ec;}
 		.glide__slides .today:before{content:"";position: absolute;top:5px;left: calc(50% - 25px);width: 50px;height:50px;background: #67d8ec;border-radius:50px;z-index: 0;   }
+
+		.glide_arrows{position:absolute;top:0%;width:100%;}
+		.glide_arrows button{border:0;background: none;color:#fff;font-family: sans-serif;border-radius:25px;width: 25px;height: 25px;transition:all 300ms ease-in;}
+		.glide_arrows button:hover{background: #eee;cursor:pointer;}
+		/*.glide__arrow--left{}*/
+		/*.glide__arrow--right{float:right;}*/
+
+
+		.modal {display: none;position: fixed;z-index: 1; left: 0;top: 0;width: 100%;height: 100%;overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); }
+		.modal-content {  background-color: #fefefe;  margin: 15% auto;  padding: 20px;  border: 1px solid #888;  width: 80%;}
+		.close {  color: #aaa;float: right; font-size: 28px;font-weight: bold;}
+		.close:hover,.close:focus {color: black;  text-decoration: none;  cursor: pointer;}
+		.modal input[type="text"]{width:100%;}
+		.modal input[type="date"]{width:100%;}
+		.modal input[type="submit"]{width:100%;}
+		.modal textarea{width:100%;resize:none;}
+
 	</style>
 </head>
 <body>
 	<div class="container center">
 		<h1 class="blue">Grid Exercise</h1>
 		<p class="pink">Level 101</p>
+		<button class="btn_today">Today</button>
 		<div class="row">
-			<p>Today</p>
 			<input type="text" name="month" value=""/>
 			<input type="text" name="day" value=""/>
 		</div>
@@ -42,17 +60,26 @@
 		    <ul class="glide__slides">
 		    </ul>
 		  </div>
-		  <div class="glide"  data-glide-el="controls">
-
+		  <div class="glide glide_arrows"  data-glide-el="controls">
 			  <div class="glide__arrows" data-glide-el="controls">
-			    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-			    <button class="glid
-			    e__arrow glide__arrow--right" data-glide-dir=">">next</button>
+			    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><</button>
+			    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">></button>
 			  </div>
 			</div>
 		</div>
 	</div>
 
+	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	  	<span class="close">&times;</span>
+	  	<h5>Crear Evento</h5>
+	  	<input type="text" name="name" placeholder="Nombre">
+	    <input type="date" name="modal_date">
+	    <input type="time" name="modal_time" value="08:00">
+	    <textarea name="description" placeholder="Descripción"></textarea>
+	    <input type="submit" class="createEvent">
+	  </div>
+	</div>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 
 	<script>
@@ -60,20 +87,20 @@
 		const hoy_ = new Date(Date.now());
 		const hoy_day = hoy_.getDate();
 		const hoy_month = hoy_.getMonth();
-
 		const month = [];
-		month[0] = "January";
-		month[1] = "February";
-		month[2] = "March";
-		month[3] = "April";
-		month[4] = "May";
-		month[5] = "June";
-		month[6] = "July";
-		month[7] = "August";
-		month[8] = "September";
-		month[9] = "October";
-		month[10] = "November";
-		month[11] = "December";
+		let calendar;
+		month[0] = 'January';
+		month[1] = 'February';
+		month[2] = 'March';
+		month[3] = 'April';
+		month[4] = 'May';
+		month[5] = 'June';
+		month[6] = 'July';
+		month[7] = 'August';
+		month[8] = 'September';
+		month[9] = 'October';
+		month[10] = 'November';
+		month[11] = 'December';
 
 		document.querySelector("input[name='month']").value = month[hoy_.getMonth()];
 		document.querySelector("input[name='day']").value = hoy_.getDate();
@@ -329,15 +356,17 @@
 		// console.log(endDate);
 
 		const setGlider = () =>{
-			// console.log(startAt)
-		  		new Glide('.glide', {
-				  type: 'carousel',
-				  startAt: startAt,
-				  perView: 7,
-				  focusAt:'center'
+		  		calendar = new Glide('.glide', {
+					type: 'carousel',
+					startAt: startAt,
+					perView: 7,
+					focusAt:'center',
+					breakpoints:{
+					690: {
+					    perView: 1
+						}
+					}
 				}).mount();
-
-
   		};
 
 		let index = 1;
@@ -351,35 +380,62 @@
 		};
   		const setCarousel = (start,end) =>{
   			let dt = start;
-			while (dt <= end){	
-				// console.log("dt:" + dt + "hoy:" + hoy_)
-				//let dt_timestamp = dt.getTime();
-				//if(dt_timestamp === hoy_timestamp){startAt = index;}
+			while (dt <= end){
 				dt.setDate(dt.getDate() + 1);
-				let node = document.createElement("LI");                 // Create a <li> node
-    			node.classList.add("glide__slide");
+				let node = document.createElement('LI');                 // Create a <li> node
+    			node.classList.add('glide__slide');
     			let day_ = dt.getDate();
     			let month_ = dt.getMonth();
-    			node.setAttribute("title",month_);
+    			node.setAttribute('title',dt);
+    			node.setAttribute('id','calendar_date');
 
     			if(checkIfToday(day_,month_,index)){
-    				node.classList.add("today");
+    				node.classList.add('today');
     			}
 
-    			// let textnode = document.createTextNode(day_ + "/" + month[month_]);         // Create a text node
-    			let pnode = document.createElement("p");         // Create a text node
-    			let textnode = document.createTextNode(day_ + "/" + month[month_]);         // Create a text node
+    			let pnode = document.createElement('p');         // Create a text node
+    			let textnode = document.createTextNode(day_ + '/' + month[month_]);         // Create a text node
 				pnode.appendChild(textnode);                              // Append the text to <li>
 				node.appendChild(pnode);                              // Append the text to <li>
-				document.querySelector(".glide__slides").appendChild(node);
+				document.querySelector('.glide__slides').appendChild(node);
 				index++;
   			}
   			setGlider();
   		};
   		setCarousel(startDate,endDate);
+  		document.querySelector('.btn_today').addEventListener('click',event => {
+  			calendar.update({
+				startAt: startAt
+			});
+  		});
+  		
+  		const modal = document.getElementById('myModal');
+  		const close = document.getElementsByClassName("close")[0];
+  		document.addEventListener('click',function(e){
+  			// console.log(e.target);
+  			
+    		if(e.target && e.target.id == 'calendar_date'){
+          		//do something
+     			const eventDateOrigin = e.target.title;
+     			let eventDate = new Date(eventDateOrigin);
+     			// let date_ = `${eventDate.getFullYear()}-${eventDate.getMonth()+1}-${eventDate.getDate()}`;
+     			let date_ = eventDate.getFullYear() + '-' + ('0' + (eventDate.getMonth()+1)).slice(-2) + '-'+ ('0' + eventDate.getDate()).slice(-2) ;
+     			console.log(date_);
+  				modal.style.display = 'block';
+  				document.querySelector('input[name="modal_date"]').value = date_;
+     		}
+ 		});
+
+  		close.onclick = function() {modal.style.display = "none";}
+
+  		// document.querySelector('.glide__slide').addEventListener('click',event =>{
+  		// 	console.log('click on glide slide');
+  		// 	let this_id = this.attribute('title');
+  		// 	console.log(this_id);
+  		// 	modal.style.display = 'block';
+  		// });
+
   		// setCarousel(new Date("March 01, 2020 11:13:00"),new Date("March 15, 2020 11:13:00"));
- 
-  		// setGlider();
 	</script>
 
 </body>
