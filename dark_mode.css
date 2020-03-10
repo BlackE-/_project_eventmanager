@@ -1,0 +1,13 @@
+body{background: #212121;color:#fafafa;}
+header{background:#3F51B5;}
+header input[name="mode"] + label{background: #000;}
+header input[name="mode"] + label:after{background: #fff;}
+header input[name="mode"] + label:before{color:#fff;}
+
+
+.glide__slides li{background-color:#fff;}
+.glide__slides li p{color:#000;}
+.glide__slides .today{border:2px solid #67d8ec;}
+.glide__slides .today:before{background: #1A237E;border:2px solid #fafafa; }
+.glide_arrows button{border:0;background: none;color:#fff;font-family: sans-serif;}
+.glide_arrows button:hover{cursor:pointer;}
