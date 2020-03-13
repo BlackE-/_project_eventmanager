@@ -19,6 +19,20 @@ header input[name="user_nav"]:checked ~ label{transform: rotate(-90deg);}
 header input[name="user_nav"] .user_nav{opacity: 0;height: 0;transition: all 300ms ease-in;}
 header input[name="user_nav"]:checked .user_nav{opacity: 1;height: 10vh;}
 
+
+nav {width:160px;height: calc(100vh - 90px);padding:10px;position: relative;}
+nav .option{display:grid;grid-template:50px / 1fr 1fr;align-items: center;justify-items: center;width:100%;height: 50px;border-radius: 20px; justify-items: center;}
+nav .option svg{max-width: 25px;}
+
+nav .siderbar_button_container{position: absolute;bottom: 0;right: 0;}
+nav .siderbar_button_container #siderbar_button{display: none;}
+nav .siderbar_button_container #siderbar_button ~ label{position: relative;width: 20px;height: 20px;display: block;}
+nav .siderbar_button_container #siderbar_button ~ label:after{content:'';position:absolute;width:15px;height: 3px;transform-origin:50%;transform: rotate(45deg);background: #fafafa;border-radius: 5px; transition: all 300ms ease-in; }
+nav .siderbar_button_container #siderbar_button ~ label:before{content:'';position:absolute;width:15px;height: 3px;transform-origin:-3px -2px;transform: rotate(-45deg);background: #fafafa;border-radius: 5px; transition: all 300ms ease-in;}
+nav .siderbar_button_container #siderbar_button:checked ~ label:after{transform: rotate(-45deg);}
+nav .siderbar_button_container #siderbar_button:checked ~ label:before{transform: rotate(45deg);transform-origin: 17px -3px;}
+
+
 .glide__slides li{position:relative;height:60vh;overflow: hidden;font-size:7px;text-align: center;}
 .glide__slides li p{font-size:7px;z-index: 10;position: relative;}
 .glide__slides .today:before{content:"";position: absolute;top:5px;left: calc(50% - 25px);width: 50px;height:50px;border-radius:50px;z-index: 0;   }

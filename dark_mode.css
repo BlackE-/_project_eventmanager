@@ -5,6 +5,13 @@ header input[name="mode"] + label:after{background: #fff;}
 header input[name="mode"] + label:before{color:#fff;}
 
 
+
+nav{background-color: #616161;}
+nav .option svg{fill:#FAFAFA;}
+nav .option svg{fill:#FAFAFA;}
+nav .option.active{background: #fff;color:#000;}
+nav .option.active svg{fill:#000;}
+
 .glide__slides li{background-color:#fff;}
 .glide__slides li p{color:#000;}
 .glide__slides .today{border:2px solid #67d8ec;}

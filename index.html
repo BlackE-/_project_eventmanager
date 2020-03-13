@@ -38,15 +38,37 @@
 		</div>
 	</header>
 	
-	<nav>
-		
+	<nav id="sidebar">
+		<div class="option active">
+			<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 47"><title>Recurso 6</title><g id="Capa_2" data-name="Capa 2"><g id="siderbar"><rect x="7.67" y="17.81" width="9.55" height="6.61"/><rect x="19.06" y="17.81" width="9.55" height="6.61"/><rect x="30.45" y="17.81" width="9.55" height="6.61"/><rect x="7.67" y="25.53" width="9.55" height="6.61"/><rect x="19.06" y="25.53" width="9.55" height="6.61"/><rect x="30.45" y="25.53" width="9.55" height="6.61"/><rect x="7.67" y="33.24" width="9.55" height="6.61"/><rect x="19.06" y="33.24" width="9.55" height="6.61"/><rect x="30.45" y="33.24" width="9.55" height="6.61"/><path d="M46,1V46H1V1H46m1-1H0V47H47V0Z"/><line x1="0.5" y1="9.5" x2="46.5" y2="9.5" style="fill:none;stroke:#000;stroke-miterlimit:10"/></g></g></svg></div>
+			<div><p>CALENDARIO</p></div>
+		</div>
+		<a href="#">
+		<div class="option">
+			<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.75 42.2"><title>Recurso 7</title><g id="Capa_2" data-name="Capa 2"><g id="siderbar"><path d="M28.25,22.94a13.46,13.46,0,0,1-15.84,0A20.38,20.38,0,0,0,0,41.73c0,.16,0,.31,0,.47H40.74c0-.16,0-.31,0-.47A20.38,20.38,0,0,0,28.25,22.94Z" style="fill:#fff"/><circle cx="20.31" cy="12" r="12" style="fill:#fff"/></g></g></svg></div>
+			<div><p>USUARIOS</p></div>
+		</div>
+		</a>
+		<a href="#">
+		<div class="option">
+			<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.66 46.96"><title>Recurso 8</title><g id="Capa_2" data-name="Capa 2"><g id="siderbar"><line x1="0.5" y1="46.46" x2="43.66" y2="46.46" style="fill:none;stroke:#fff;stroke-miterlimit:10"/><line x1="0.5" y1="46.46" x2="0.5" y2="45.3" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px"/><path d="M43.66,46.46" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px"/><line x1="0.5" x2="0.5" y2="46.46" style="fill:none;stroke:#fff;stroke-miterlimit:10"/><rect x="33.02" y="19.63" width="8.67" height="23.23" style="fill:#fff"/><rect x="23.39" y="31.24" width="8.67" height="11.61" style="fill:#fff"/><rect x="13.75" y="2.2" width="8.67" height="40.65" style="fill:#fff"/><rect x="4.11" y="13.82" width="8.67" height="29.04" style="fill:#fff"/></g></g></svg></div>
+			<div><p>ANALYTICS</p></div>
+		</div>
+		</a>
+		<div class="siderbar_button_container">
+			<input type="checkbox" name="siderbar_button" id="siderbar_button">
+			<label for="siderbar_button"></label>
+		</div>
+
 	</nav>
-	<div class="container center">
-		<button class="btn_today">Today</button>
-		<div class="row">
-			<input type="text" name="year" value=""/>
-			<input type="text" name="month" value=""/>
-			
+	<div id="main">
+		<div class="container center">
+			<button class="btn_today">Today</button>
+			<div class="row">
+				<input type="text" name="year" value=""/>
+				<input type="text" name="month" value=""/>
+				
+			</div>
 		</div>
 	</div>
 
@@ -81,17 +103,17 @@
 	<script type="text/javascript" src="calendar.js"></script>
 	<script type="text/javascript" src="control.js"></script>
 	<script type="text/javascript">
-		const getEvents = () =>{
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-			  if (this.readyState == 4 && this.status == 200) {
-			    var myObj = JSON.parse(this.responseText);
-			    document.getElementById("demo").innerHTML = myObj.name;
-			  }
-			};
-			xmlhttp.open("GET", "event_test.txt", true);
-			xmlhttp.send();
-		}
+		// const getEvents = () =>{
+		// 	var xmlhttp = new XMLHttpRequest();
+		// 	xmlhttp.onreadystatechange = function() {
+		// 	  if (this.readyState == 4 && this.status == 200) {
+		// 	    var myObj = JSON.parse(this.responseText);
+		// 	    document.getElementById("demo").innerHTML = myObj.name;
+		// 	  }
+		// 	};
+		// 	xmlhttp.open("GET", "event_test.txt", true);
+		// 	xmlhttp.send();
+		// }
 		
 	</script>
 
