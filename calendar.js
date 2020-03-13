@@ -30,26 +30,27 @@ class Calendar{
 	}
 
 	_setYearInput = (year) =>{
-		document.querySelector("input[name='year']").value = year;
+		document.querySelector('input[name="year"]').value = year;
 	}
 
 	_setMonthInput = (month) =>{
-		document.querySelector("input[name='month']").value = this.month[month];
+		document.querySelector('input[name="month"]').value = this.month[month];
 	}
 
 	_leapYear = (year) =>{
-		return year % 4 == 0 ? true:false;
+		// return year % 4 === 0 ? true:false; CONDITIONAL DEVUELVE UN VALOR
+		return year % 4 === 0;
 	}
 	_get3MonthsAfterToday = (date_,date_timestamp) =>{
 		const day_ = date_.getDate();
 		const month_ = date_.getMonth();
 		const year_ = date_.getFullYear();
-		let remaing_days = 0;
+		// let remaing_days = 0;
 		let days_ = 0;
 		switch(month_){
 			case 0:
 				//january
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar febrero,marzo,abril
 				days_ = this._leapYear(year_) ? 28 : 29;
@@ -58,7 +59,7 @@ class Calendar{
 			break;
 			case 1:
 				//february
-				remaing_days = this._leapYear(year_) ? 29 - day_ : 28 - day_;
+				// remaing_days = this._leapYear(year_) ? 29 - day_ : 28 - day_;
 				//regresar marzo,abril,mayo
 				days_ += 31; //marzo
 				days_ += 30; //abril
@@ -66,7 +67,7 @@ class Calendar{
 			break;
 			case 2:
 				//march
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar abril,mayo,junio
 				days_ += 30; //abril
@@ -75,7 +76,7 @@ class Calendar{
 			break;
 			case 3:
 				//april
-				remaing_days = 30 - day_;
+				// remaing_days = 30 - day_;
 
 				//regresar mayo,junio,julio
 				days_ += 31; //mayo
@@ -84,7 +85,7 @@ class Calendar{
 			break;
 			case 4:
 				//may
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar junio,julio,agosto
 				days_ += 30; //junio
@@ -93,7 +94,7 @@ class Calendar{
 			break;
 			case 5:
 				//june
-				remaing_days = 30 - day_;
+				// remaing_days = 30 - day_;
 
 				//regresar julio,agosto,septiembre
 				days_ += 31; //julio
@@ -102,7 +103,7 @@ class Calendar{
 			break;
 			case 6:
 				//july
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar agosto,septiembre,octubre
 				days_ += 31; //agosto
@@ -111,7 +112,7 @@ class Calendar{
 			break;
 			case 7:
 				//august
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar septiembre,octubre,noviembre
 				days_ += 31; //septiembre
@@ -120,7 +121,7 @@ class Calendar{
 			break;
 			case 8:
 				//september
-				remaing_days = 30 - day_;
+				// remaing_days = 30 - day_;
 
 				//regresar octubre,noviembre,diciembre
 				days_ += 31; //octubre
@@ -129,7 +130,7 @@ class Calendar{
 			break;
 			case 9:
 				//october
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar noviembre,diciembre,enero
 				days_ += 30; //noviembre
@@ -138,7 +139,7 @@ class Calendar{
 			break;
 			case 10:
 				//november
-				remaing_days = 30 - day_;
+				// remaing_days = 30 - day_;
 
 				//regresar diciembre,enero,febrero
 				days_ += 31; //diciembre
@@ -147,7 +148,7 @@ class Calendar{
 			break;
 			case 11:
 				//march
-				remaing_days = 31 - day_;
+				// remaing_days = 31 - day_;
 
 				//regresar enero,febrero,marzo
 				days_ += 31; //agosto
@@ -279,11 +280,16 @@ class Calendar{
 	}
 
 	_checkIfToday = (day_,month_,index) => {
-		if(this.today_day === day_ && this.today_month === month_){
+		// if(this.today_day === day_ && this.today_month === month_){
+		// 	this.startAt = index;
+		// 	return true;
+		// }
+		// return false;
+		const condition = this.today_day === day_ && this.today_month === month_;
+		if(condition){
 			this.startAt = index;
-			return true;
 		}
-		return false;
+		return condition;	
 	}
 
 	_formateDate = (date_) =>{
